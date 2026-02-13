@@ -8,7 +8,7 @@
       "bottom_price": 170,
       "colors": ["black", "brown", "tan"],
       "rating": 4.8,
-      "image": "/products/leather_tote.jpg"
+      "image": "/images/leather_tote.png"
     },
     {
       "id": 2,
@@ -19,7 +19,7 @@
       "bottom_price": 140,
       "colors": ["black", "silver"],
       "rating": 4.7,
-      "image": "/products/minimal_watch.jpg"
+      "image": "/images/minimal_watch.png"
     },
     {
       "id": 3,
@@ -30,7 +30,7 @@
       "bottom_price": 48,
       "colors": ["white", "blue", "black"],
       "rating": 4.6,
-      "image": "/products/cotton_shirt.jpg"
+      "image": "/images/cotton_shirt.png"
     },
     {
       "id": 4,
@@ -41,7 +41,7 @@
       "bottom_price": 190,
       "colors": ["charcoal", "navy"],
       "rating": 4.9,
-      "image": "/products/blazer.jpg"
+      "image": "/images/blazer.png"
     },
     {
       "id": 5,
@@ -52,7 +52,7 @@
       "bottom_price": 210,
       "colors": ["emerald", "black"],
       "rating": 4.8,
-      "image": "/products/evening_dress.jpg"
+      "image": "/images/evening_dress.png"
     },
     {
       "id": 6,
@@ -63,7 +63,7 @@
       "bottom_price": 50,
       "colors": ["black", "brown"],
       "rating": 4.5,
-      "image": "/products/wallet.jpg"
+      "image": "/images/wallet.png"
     },
     {
       "id": 7,
@@ -74,7 +74,7 @@
       "bottom_price": 105,
       "colors": ["black", "gold"],
       "rating": 4.7,
-      "image": "/products/sunglasses.jpg"
+      "image": "/images/sunglasses.png"
     },
     {
       "id": 8,
@@ -85,7 +85,7 @@
       "bottom_price": 260,
       "colors": ["charcoal", "camel"],
       "rating": 4.9,
-      "image": "/products/overcoat.jpg"
+      "image": "/images/overcoat.png"
     },
     {
       "id": 9,
@@ -96,7 +96,7 @@
       "bottom_price": 55,
       "colors": ["beige", "white"],
       "rating": 4.4,
-      "image": "/products/linen_shirt.jpg"
+      "image": "/images/linen_shirt.png"
     },
     {
       "id": 10,
@@ -107,7 +107,7 @@
       "bottom_price": 165,
       "colors": ["black", "brown"],
       "rating": 4.8,
-      "image": "/products/chelsea_boots.jpg"
+      "image": "/images/chelsea_boots.png"
     },
     {
       "id": 11,
@@ -118,7 +118,7 @@
       "bottom_price": 120,
       "colors": ["white", "black"],
       "rating": 4.6,
-      "image": "/products/sneakers.jpg"
+      "image": "/images/sneakers.png"
     },
     {
       "id": 12,
@@ -129,7 +129,7 @@
       "bottom_price": 145,
       "colors": ["black", "grey"],
       "rating": 4.7,
-      "image": "/products/laptop_bag.jpg"
+      "image": "/images/laptop_bag.png"
     },
     {
       "id": 13,
@@ -140,7 +140,7 @@
       "bottom_price": 45,
       "colors": ["emerald", "cream"],
       "rating": 4.3,
-      "image": "/products/silk_scarf.jpg"
+      "image": "/images/silk_scarf.png"
     },
     {
       "id": 14,
@@ -151,7 +151,7 @@
       "bottom_price": 65,
       "colors": ["black", "brown"],
       "rating": 4.5,
-      "image": "/products/belt.jpg"
+      "image": "/images/belt.png"
     },
     {
       "id": 15,
@@ -162,7 +162,7 @@
       "bottom_price": 40,
       "colors": ["navy", "white"],
       "rating": 4.2,
-      "image": "/products/polo.jpg"
+      "image": "/images/polo.png"
     },
     {
       "id": 16,
@@ -173,7 +173,7 @@
       "bottom_price": 135,
       "colors": ["black", "grey"],
       "rating": 4.6,
-      "image": "/products/backpack.jpg"
+      "image": "/images/backpack.png"
     },
     {
       "id": 17,
@@ -184,7 +184,7 @@
       "bottom_price": 185,
       "colors": ["cream", "charcoal"],
       "rating": 4.9,
-      "image": "/products/cashmere_sweater.jpg"
+      "image": "/images/cashmere_sweater.png"
     },
     {
       "id": 18,
@@ -195,7 +195,7 @@
       "bottom_price": 95,
       "colors": ["standard"],
       "rating": 4.7,
-      "image": "/products/perfume.jpg"
+      "image": "/images/perfume.png"
     },
     {
       "id": 19,
@@ -206,7 +206,7 @@
       "bottom_price": 210,
       "colors": ["black", "brown"],
       "rating": 4.8,
-      "image": "/products/oxford_shoes.jpg"
+      "image": "/images/oxford_shoes.png"
     },
     {
       "id": 20,
@@ -217,6 +217,6 @@
       "bottom_price": 70,
       "colors": ["gold"],
       "rating": 4.4,
-      "image": "/products/gold_bracelet.jpg"
+      "image": "/images/gold_bracelet.png"
     }
   ]
