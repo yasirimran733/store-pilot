@@ -1,6 +1,7 @@
 'use client';
 
 import { useStore } from '@/app/context/StoreContext';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 export default function ProductDetail() {
@@ -11,12 +12,12 @@ export default function ProductDetail() {
     navigateTo,
     addToCart,
   } = useStore();
+  const pathname = usePathname();
 
-  // Find current product - this will re-render when currentProductId changes
   const product = currentProductId ? products.find((p) => p.id === currentProductId) : null;
+  const isOnProductPage = pathname && /^\/products\/\d+$/.test(pathname);
 
-  // If not on product page or no product, don't render
-  if (currentPage !== 'product' || !product) {
+  if (currentPage !== 'product' || !product || isOnProductPage) {
     return null;
   }
 

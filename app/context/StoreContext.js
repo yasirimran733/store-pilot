@@ -1,9 +1,12 @@
 'use client';
 
-import { createContext, useContext, useState, useCallback, useMemo } from 'react';
+import { createContext, useContext, useState, useCallback, useMemo, useEffect } from 'react';
 import inventoryProducts from '@/data/products.json';
 
 const StoreContext = createContext(undefined);
+
+const CART_STORAGE_KEY = 'store-pilot-cart';
+const COUPON_STORAGE_KEY = 'store-pilot-coupon';
 
 function normalizeText(value) {
   if (value === null || value === undefined) return '';
@@ -325,11 +328,66 @@ export function StoreProvider({ children }) {
   const [activeCategory, setActiveCategory] = useState(null);
   const [sortOrder, setSortOrder] = useState(null);
 
-  // Cart State
+  // Cart State (hydrated from localStorage in useEffect)
   const [cartItems, setCartItems] = useState([]);
 
-  // Coupon State
+  // Coupon State (hydrated from localStorage in useEffect)
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+
+  // Hydrate cart and coupon from localStorage once on mount
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const rawCart = window.localStorage.getItem(CART_STORAGE_KEY);
+      if (rawCart) {
+        const parsed = JSON.parse(rawCart);
+        if (Array.isArray(parsed) && parsed.length > 0 && initialInventory.length > 0) {
+          const rehydrated = parsed
+            .map(({ productId, quantity }) => {
+              const product = initialInventory.find((p) => p.id === productId);
+              return product && quantity > 0 ? { product: { ...product }, quantity } : null;
+            })
+            .filter(Boolean);
+          if (rehydrated.length > 0) setCartItems(rehydrated);
+        }
+      }
+      const rawCoupon = window.localStorage.getItem(COUPON_STORAGE_KEY);
+      if (rawCoupon) {
+        const coupon = JSON.parse(rawCoupon);
+        if (coupon && typeof coupon.code === 'string' && typeof coupon.discountPercent === 'number') {
+          setAppliedCoupon({ code: coupon.code, discountPercent: coupon.discountPercent });
+        }
+      }
+    } catch (_) {
+      // ignore parse errors
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- run once on mount; initialInventory is static
+
+  // Persist cart and coupon to localStorage whenever they change
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const toStore = cartItems.map((item) => ({
+        productId: item.product.id,
+        quantity: item.quantity,
+      }));
+      window.localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(toStore));
+    } catch (_) {}
+  }, [cartItems]);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      if (appliedCoupon) {
+        window.localStorage.setItem(COUPON_STORAGE_KEY, JSON.stringify({
+          code: appliedCoupon.code,
+          discountPercent: appliedCoupon.discountPercent,
+        }));
+      } else {
+        window.localStorage.removeItem(COUPON_STORAGE_KEY);
+      }
+    } catch (_) {}
+  }, [appliedCoupon]);
 
   // Haggle/Negotiation State
   const [negotiationHistory, setNegotiationHistory] = useState([]);
