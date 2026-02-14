@@ -1,0 +1,222 @@
+[
+    {
+      "id": 1,
+      "name": "Classic Leather Tote",
+      "category": "bags",
+      "description": "Premium full-grain leather tote designed for everyday elegance and durability.",
+      "price": 220,
+      "bottom_price": 170,
+      "colors": ["black", "brown", "tan"],
+      "rating": 4.8,
+      "image": "/products/leather_tote.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Minimalist Analog Watch",
+      "category": "accessories",
+      "description": "Clean dial luxury watch with stainless steel casing and leather strap.",
+      "price": 180,
+      "bottom_price": 140,
+      "colors": ["black", "silver"],
+      "rating": 4.7,
+      "image": "/products/minimal_watch.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Slim Fit Cotton Shirt",
+      "category": "clothing",
+      "description": "Breathable premium cotton shirt tailored for a modern refined fit.",
+      "price": 65,
+      "bottom_price": 48,
+      "colors": ["white", "blue", "black"],
+      "rating": 4.6,
+      "image": "/products/cotton_shirt.jpg"
+    },
+    {
+      "id": 4,
+      "name": "Tailored Blazer",
+      "category": "clothing",
+      "description": "Structured luxury blazer ideal for formal events and premium occasions.",
+      "price": 240,
+      "bottom_price": 190,
+      "colors": ["charcoal", "navy"],
+      "rating": 4.9,
+      "image": "/products/blazer.jpg"
+    },
+    {
+      "id": 5,
+      "name": "Elegant Evening Dress",
+      "category": "clothing",
+      "description": "Flowing silhouette evening dress designed for weddings and formal gatherings.",
+      "price": 260,
+      "bottom_price": 210,
+      "colors": ["emerald", "black"],
+      "rating": 4.8,
+      "image": "/products/evening_dress.jpg"
+    },
+    {
+      "id": 6,
+      "name": "Premium Leather Wallet",
+      "category": "accessories",
+      "description": "Compact handcrafted wallet with RFID protection and minimalist design.",
+      "price": 70,
+      "bottom_price": 50,
+      "colors": ["black", "brown"],
+      "rating": 4.5,
+      "image": "/products/wallet.jpg"
+    },
+    {
+      "id": 7,
+      "name": "Luxury Sunglasses",
+      "category": "accessories",
+      "description": "UV-protected polarized sunglasses with premium matte frame finish.",
+      "price": 140,
+      "bottom_price": 105,
+      "colors": ["black", "gold"],
+      "rating": 4.7,
+      "image": "/products/sunglasses.jpg"
+    },
+    {
+      "id": 8,
+      "name": "Wool Overcoat",
+      "category": "clothing",
+      "description": "Heavyweight wool overcoat offering warmth with refined minimal styling.",
+      "price": 320,
+      "bottom_price": 260,
+      "colors": ["charcoal", "camel"],
+      "rating": 4.9,
+      "image": "/products/overcoat.jpg"
+    },
+    {
+      "id": 9,
+      "name": "Casual Linen Shirt",
+      "category": "clothing",
+      "description": "Lightweight breathable linen shirt ideal for summer occasions.",
+      "price": 75,
+      "bottom_price": 55,
+      "colors": ["beige", "white"],
+      "rating": 4.4,
+      "image": "/products/linen_shirt.jpg"
+    },
+    {
+      "id": 10,
+      "name": "Leather Chelsea Boots",
+      "category": "footwear",
+      "description": "Handcrafted leather boots combining comfort with premium urban style.",
+      "price": 210,
+      "bottom_price": 165,
+      "colors": ["black", "brown"],
+      "rating": 4.8,
+      "image": "/products/chelsea_boots.jpg"
+    },
+    {
+      "id": 11,
+      "name": "Minimal Sneakers",
+      "category": "footwear",
+      "description": "Clean white premium sneakers with modern luxury aesthetic.",
+      "price": 150,
+      "bottom_price": 120,
+      "colors": ["white", "black"],
+      "rating": 4.6,
+      "image": "/products/sneakers.jpg"
+    },
+    {
+      "id": 12,
+      "name": "Structured Laptop Bag",
+      "category": "bags",
+      "description": "Professional slim laptop bag crafted with premium vegan leather.",
+      "price": 190,
+      "bottom_price": 145,
+      "colors": ["black", "grey"],
+      "rating": 4.7,
+      "image": "/products/laptop_bag.jpg"
+    },
+    {
+      "id": 13,
+      "name": "Silk Scarf",
+      "category": "accessories",
+      "description": "Soft premium silk scarf adding elegance to any formal outfit.",
+      "price": 60,
+      "bottom_price": 45,
+      "colors": ["emerald", "cream"],
+      "rating": 4.3,
+      "image": "/products/silk_scarf.jpg"
+    },
+    {
+      "id": 14,
+      "name": "Designer Belt",
+      "category": "accessories",
+      "description": "Luxury leather belt with brushed metal buckle and refined finish.",
+      "price": 85,
+      "bottom_price": 65,
+      "colors": ["black", "brown"],
+      "rating": 4.5,
+      "image": "/products/belt.jpg"
+    },
+    {
+      "id": 15,
+      "name": "Premium Polo Shirt",
+      "category": "clothing",
+      "description": "Structured cotton polo shirt designed for clean premium casual wear.",
+      "price": 55,
+      "bottom_price": 40,
+      "colors": ["navy", "white"],
+      "rating": 4.2,
+      "image": "/products/polo.jpg"
+    },
+    {
+      "id": 16,
+      "name": "Luxury Travel Backpack",
+      "category": "bags",
+      "description": "Ergonomic travel backpack built with water-resistant premium fabric.",
+      "price": 175,
+      "bottom_price": 135,
+      "colors": ["black", "grey"],
+      "rating": 4.6,
+      "image": "/products/backpack.jpg"
+    },
+    {
+      "id": 17,
+      "name": "Cashmere Sweater",
+      "category": "clothing",
+      "description": "Ultra-soft cashmere knit sweater offering warmth and elegance.",
+      "price": 230,
+      "bottom_price": 185,
+      "colors": ["cream", "charcoal"],
+      "rating": 4.9,
+      "image": "/products/cashmere_sweater.jpg"
+    },
+    {
+      "id": 18,
+      "name": "Luxury Perfume",
+      "category": "accessories",
+      "description": "Signature long-lasting fragrance designed for refined personalities.",
+      "price": 130,
+      "bottom_price": 95,
+      "colors": ["standard"],
+      "rating": 4.7,
+      "image": "/products/perfume.jpg"
+    },
+    {
+      "id": 19,
+      "name": "Formal Oxford Shoes",
+      "category": "footwear",
+      "description": "Polished leather Oxford shoes crafted for formal events and business wear.",
+      "price": 260,
+      "bottom_price": 210,
+      "colors": ["black", "brown"],
+      "rating": 4.8,
+      "image": "/products/oxford_shoes.jpg"
+    },
+    {
+      "id": 20,
+      "name": "Minimal Gold Bracelet",
+      "category": "accessories",
+      "description": "Elegant minimal bracelet with premium gold-tone finishing.",
+      "price": 95,
+      "bottom_price": 70,
+      "colors": ["gold"],
+      "rating": 4.4,
+      "image": "/products/gold_bracelet.jpg"
+    }
+  ]
