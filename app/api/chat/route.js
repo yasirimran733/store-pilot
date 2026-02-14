@@ -32,8 +32,8 @@ export async function POST(request) {
 
     // Call OpenAI with function calling enabled
     // Default: gpt-4o-mini for cheaper testing. Override with OPENAI_MODEL for different model (e.g. gpt-4o for best accuracy).
-    const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
-    // const model = process.env.OPENAI_MODEL || 'gpt-4o';
+    // const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+    const model = process.env.OPENAI_MODEL || 'gpt-4o';
 
     
     const completion = await openai.chat.completions.create({
