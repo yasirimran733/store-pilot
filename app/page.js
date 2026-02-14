@@ -25,7 +25,7 @@ export default function Home() {
             <h1 className="text-h1 mb-6 text-white">
               Find what you love, the human way.
             </h1>
-            <p className="text-lg text-slate-300 leading-relaxed mb-10">
+            <p className="text-lg text-slate-200 leading-relaxed mb-10">
               Your AI shopkeeper understands what you need. Describe it in your own words—browse, compare, add to cart, and even haggle—all through a simple conversation.
             </p>
             <div className="flex flex-wrap gap-4">
@@ -52,8 +52,8 @@ export default function Home() {
       <section id="featured" className="py-16 md:py-20">
         <div className="container-main">
           <div className="mb-10">
-            <h2 className="text-h2 mb-2">Featured products</h2>
-            <p className="text-slate-600 text-lg max-w-xl">
+            <h2 className="text-h2 mb-2 text-slate-900">Featured products</h2>
+            <p className="text-slate-700 text-lg max-w-xl">
               Handpicked items loved by our customers. Ask the AI Clerk for recommendations or discounts.
             </p>
           </div>
@@ -64,7 +64,7 @@ export default function Home() {
       {/* Trust & How it works */}
       <section className="py-16 md:py-20 bg-white border-y border-slate-200/80">
         <div className="container-main">
-          <h2 className="text-h2 text-center mb-12">How it works</h2>
+          <h2 className="text-h2 text-center mb-12 text-slate-900">How it works</h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             <div className="text-center">
               <div className="w-14 h-14 rounded-2xl bg-emerald-100 flex items-center justify-center mx-auto mb-5">
@@ -72,8 +72,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
                 </svg>
               </div>
-              <h3 className="text-h3 mb-2">Chat with the Clerk</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-h3 mb-2 text-slate-900">Chat with the Clerk</h3>
+              <p className="text-slate-700 leading-relaxed">
                 Tell the AI what you’re looking for in plain language—no menus, no filters to click.
               </p>
             </div>
@@ -83,8 +83,8 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
               </div>
-              <h3 className="text-h3 mb-2">Discover & compare</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-h3 mb-2 text-slate-900">Discover & compare</h3>
+              <p className="text-slate-700 leading-relaxed">
                 The shopkeeper searches and sorts for you. Say “cheaper options” and the page updates.
               </p>
             </div>
@@ -94,13 +94,13 @@ export default function Home() {
                   <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
                 </svg>
               </div>
-              <h3 className="text-h3 mb-2">Cart & checkout</h3>
-              <p className="text-slate-600 leading-relaxed">
+              <h3 className="text-h3 mb-2 text-slate-900">Cart & checkout</h3>
+              <p className="text-slate-700 leading-relaxed">
                 Add to cart, ask for a discount, and go to checkout—all via chat or the usual buttons.
               </p>
             </div>
           </div>
-          <div className="mt-14 flex flex-wrap justify-center gap-6 text-sm text-slate-500">
+          <div className="mt-14 flex flex-wrap justify-center gap-6 text-sm text-slate-600">
             <span className="flex items-center gap-2">
               <span className="text-emerald-500">★</span> AI-assisted shopping
             </span>

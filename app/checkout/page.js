@@ -19,8 +19,8 @@ export default function CheckoutRoutePage() {
       <div className="min-h-screen bg-[var(--background)]">
         <Navbar />
         <div className="container-main py-24 text-center">
-          <h2 className="text-h2 mb-2">Your cart is empty</h2>
-          <p className="text-slate-600 mb-8">Add items before checkout.</p>
+          <h2 className="text-h2 mb-2 text-slate-900">Your cart is empty</h2>
+          <p className="text-slate-700 mb-8">Add items before checkout.</p>
           <Link href="/products" onClick={() => navigateTo('products')} className="btn-primary">
             Browse products
           </Link>

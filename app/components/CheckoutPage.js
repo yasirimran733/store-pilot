@@ -25,8 +25,8 @@ export default function CheckoutPage() {
     return (
       <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4" onClick={handleClose}>
         <div className="bg-white rounded-2xl max-w-md w-full p-8 text-center shadow-xl animate-panel-slide" onClick={(e) => e.stopPropagation()}>
-          <h2 className="text-h2 mb-4">Your cart is empty</h2>
-          <p className="text-slate-600 mb-6">Add items to your cart before checkout.</p>
+          <h2 className="text-h2 mb-4 text-slate-900">Your cart is empty</h2>
+          <p className="text-slate-700 mb-6">Add items to your cart before checkout.</p>
           <Link href="/products" onClick={handleClose} className="btn-primary">
             Browse products
           </Link>
@@ -48,7 +48,7 @@ export default function CheckoutPage() {
         </div>
 
         <div className="p-6 space-y-6">
-          <p className="text-sm text-slate-500 bg-slate-50 rounded-xl px-4 py-3 border border-slate-200/80">
+          <p className="text-sm text-slate-700 bg-slate-50 rounded-xl px-4 py-3 border border-slate-200/80">
             <strong>Demo checkout.</strong> No payment is processed. This is for demonstration only.
           </p>
 
@@ -66,7 +66,7 @@ export default function CheckoutPage() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-slate-900 mb-0.5">{item.product.name}</p>
-                    <p className="text-xs text-slate-500 uppercase">{item.product.category}</p>
+                    <p className="text-xs text-slate-600 uppercase">{item.product.category}</p>
                     <p className="text-sm text-slate-600 mt-1">${item.product.price} × {item.quantity}</p>
                   </div>
                   <div className="text-right">
@@ -89,7 +89,7 @@ export default function CheckoutPage() {
           )}
 
           <div className="border-t border-slate-200 pt-4 space-y-2">
-            <div className="flex justify-between text-slate-600"><span>Subtotal</span><span>${cartTotal.subtotal.toFixed(2)}</span></div>
+            <div className="flex justify-between text-slate-700"><span>Subtotal</span><span>${cartTotal.subtotal.toFixed(2)}</span></div>
             {appliedCoupon && cartTotal.discount !== 0 && (
               <div className={`flex justify-between ${cartTotal.isPenalty ? 'text-red-600' : 'text-emerald-600'}`}>
                 <span>{cartTotal.isPenalty ? 'Adjustment' : 'Discount'}</span>

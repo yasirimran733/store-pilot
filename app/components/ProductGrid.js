@@ -13,8 +13,8 @@ export default function ProductGrid() {
         <svg className="h-16 w-16 text-slate-300 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
           <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
         </svg>
-        <p className="text-slate-600 text-lg font-medium mb-1">No products found</p>
-        <p className="text-slate-500 text-sm">Try a different search or filter in chat.</p>
+        <p className="text-slate-700 text-lg font-medium mb-1">No products found</p>
+        <p className="text-slate-600 text-sm">Try a different search or filter in chat.</p>
       </div>
     );
   }

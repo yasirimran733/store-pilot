@@ -27,8 +27,8 @@ export default function CartPage() {
               <path strokeLinecap="round" strokeLinejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
             </svg>
           </div>
-          <h2 className="text-h2 mb-2">Your cart is empty</h2>
-          <p className="text-slate-600 mb-8 max-w-sm">Add items from the store or ask the AI Clerk to add them for you.</p>
+          <h2 className="text-h2 mb-2 text-slate-900">Your cart is empty</h2>
+            <p className="text-slate-700 mb-8 max-w-sm">Add items from the store or ask the AI Clerk to add them for you.</p>
           <div className="flex flex-wrap gap-4 justify-center">
             <Link
               href="/products"
@@ -56,7 +56,7 @@ export default function CartPage() {
       <Navbar />
 
       <div className="container-main py-10">
-        <h1 className="text-h2 mb-8">Shopping cart</h1>
+        <h1 className="text-h2 mb-8 text-slate-900">Shopping cart</h1>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
           <div className="lg:col-span-2 space-y-4">
@@ -147,7 +147,7 @@ export default function CartPage() {
               )}
 
               <div className="space-y-3 mb-6">
-                <div className="flex justify-between text-slate-600">
+                <div className="flex justify-between text-slate-700">
                   <span>Subtotal</span>
                   <span>${cartTotal.subtotal.toFixed(2)}</span>
                 </div>
@@ -180,7 +180,7 @@ export default function CartPage() {
                 <Link
                   href="/products"
                   onClick={() => navigateTo('products')}
-                  className="w-full text-center block text-slate-600 hover:text-slate-900 font-medium text-sm py-2"
+                  className="w-full text-center block text-slate-700 hover:text-slate-900 font-medium text-sm py-2"
                 >
                   Continue shopping
                 </Link>

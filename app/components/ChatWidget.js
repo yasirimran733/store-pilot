@@ -3,6 +3,16 @@
 import { useState, useRef, useEffect } from 'react';
 import { useStore } from '@/app/context/StoreContext';
 
+/** Remove image URLs from AI message content so they are not shown in chat. */
+function stripImageUrls(text) {
+  if (typeof text !== 'string') return text;
+  const imageUrlLine = /^\s*(https?:\/\/[^\s]*\.(png|jpg|jpeg|gif|webp)(\?[^\s]*)?|\/images\/[^\s]*)\s*$/gim;
+  const inlineImageUrl = /https?:\/\/[^\s]*\.(png|jpg|jpeg|gif|webp)(\?[^\s]*)?|\/images\/[^\s]*(?=\s|$)/gim;
+  let out = text.replace(imageUrlLine, '').replace(inlineImageUrl, '');
+  out = out.replace(/\n{3,}/g, '\n\n').trim();
+  return out;
+}
+
 export default function ChatWidget() {
   const [messages, setMessages] = useState([
     {
@@ -141,7 +151,7 @@ export default function ChatWidget() {
       {/* Header */}
       <div className="px-6 py-4 border-b border-stone-200 bg-white">
         <h2 className="text-xl font-semibold text-slate-800">Chat with Shopkeeper</h2>
-        <p className="text-sm text-stone-600 mt-1">Your AI shopping assistant</p>
+        <p className="text-sm text-slate-600 mt-1">Your AI shopping assistant</p>
       </div>
 
       {/* Messages */}
@@ -162,9 +172,11 @@ export default function ChatWidget() {
                   : 'bg-white text-slate-800 border border-stone-200'
               }`}
             >
-              <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.content}</p>
+              <p className="text-sm leading-relaxed whitespace-pre-wrap">
+                {msg.role === 'assistant' ? stripImageUrls(msg.content) : msg.content}
+              </p>
               {msg.executedFunction && (
-                <p className="text-xs mt-2 opacity-70 italic">
+                <p className="text-xs mt-2 text-slate-600 italic">
                   ✓ {msg.executedFunction.name} executed
                 </p>
               )}
@@ -193,7 +205,7 @@ export default function ChatWidget() {
             value={input}
             onChange={(e) => setInput(e.target.value)}
             placeholder="Ask me anything about our products..."
-            className="flex-1 px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800 placeholder-stone-400"
+            className="flex-1 px-4 py-2 border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800 placeholder:text-slate-500"
             disabled={isLoading}
           />
           <button

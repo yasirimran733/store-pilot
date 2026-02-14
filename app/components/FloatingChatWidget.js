@@ -6,6 +6,18 @@ import { useStore } from '@/app/context/StoreContext';
 import { useChatOpen } from '@/app/context/ChatOpenContext';
 import { useToast } from '@/app/context/ToastContext';
 
+/** Remove image URLs from AI message content so they are not shown in chat. */
+function stripImageUrls(text) {
+  if (typeof text !== 'string') return text;
+  // Remove lines that are only image URLs (absolute or relative)
+  const imageUrlLine = /^\s*(https?:\/\/[^\s]*\.(png|jpg|jpeg|gif|webp)(\?[^\s]*)?|\/images\/[^\s]*)\s*$/gim;
+  // Remove inline image URLs
+  const inlineImageUrl = /https?:\/\/[^\s]*\.(png|jpg|jpeg|gif|webp)(\?[^\s]*)?|\/images\/[^\s]*(?=\s|$)/gim;
+  let out = text.replace(imageUrlLine, '').replace(inlineImageUrl, '');
+  out = out.replace(/\n{3,}/g, '\n\n').trim();
+  return out;
+}
+
 export default function FloatingChatWidget() {
   const [messages, setMessages] = useState([
     {
@@ -163,7 +175,7 @@ export default function FloatingChatWidget() {
           <div className="flex items-center justify-between px-5 py-4 border-b border-slate-200 bg-slate-50/80">
             <div>
               <h3 className="font-semibold text-slate-900">AI Shopkeeper</h3>
-              <p className="text-xs text-slate-500">Ask me anything</p>
+              <p className="text-xs text-slate-600">Ask me anything</p>
             </div>
             <button
               type="button"
@@ -189,9 +201,11 @@ export default function FloatingChatWidget() {
                       : 'bg-white text-slate-800 border border-slate-200/80 shadow-sm rounded-bl-md'
                   }`}
                 >
-                  <p className="whitespace-pre-wrap leading-relaxed">{msg.content}</p>
+                  <p className="whitespace-pre-wrap leading-relaxed">
+                    {msg.role === 'assistant' ? stripImageUrls(msg.content) : msg.content}
+                  </p>
                   {msg.executedFunction && (
-                    <p className="text-xs mt-2 text-slate-500">✓ Action completed</p>
+                    <p className="text-xs mt-2 text-slate-600">✓ Action completed</p>
                   )}
                 </div>
               </div>

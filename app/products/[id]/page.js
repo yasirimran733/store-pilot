@@ -36,8 +36,8 @@ export default function ProductDetailPage() {
       <div className="min-h-screen bg-[var(--background)]">
         <Navbar />
         <div className="container-main py-24 text-center">
-          <h2 className="text-h2 mb-4">Product not found</h2>
-          <p className="text-slate-600 mb-8">This product doesn’t exist or was removed.</p>
+          <h2 className="text-h2 mb-4 text-slate-900">Product not found</h2>
+          <p className="text-slate-700 mb-8">This product doesn’t exist or was removed.</p>
           <Link href="/products" className="btn-primary" onClick={() => navigateTo('products')}>
             Browse products
           </Link>
@@ -52,7 +52,7 @@ export default function ProductDetailPage() {
       <Navbar />
 
       <div className="container-main py-10">
-        <nav className="mb-8 flex items-center gap-2 text-sm text-slate-500">
+        <nav className="mb-8 flex items-center gap-2 text-sm text-slate-600">
           <Link href="/" className="hover:text-slate-800 transition-colors">Home</Link>
           <span>/</span>
           <Link href="/products" className="hover:text-slate-800 transition-colors">Products</Link>
@@ -85,8 +85,8 @@ export default function ProductDetailPage() {
                 <span className="text-amber-500">★</span>
                 <span className="text-sm font-medium text-slate-700">{product.rating} / 5</span>
               </div>
-              <h1 className="text-h2 mb-4">{product.name}</h1>
-              <p className="text-slate-600 leading-relaxed text-lg">{product.description}</p>
+              <h1 className="text-h2 mb-4 text-slate-900">{product.name}</h1>
+              <p className="text-slate-700 leading-relaxed text-lg">{product.description}</p>
             </div>
 
             <div className="py-6 border-y border-slate-200">
@@ -126,7 +126,7 @@ export default function ProductDetailPage() {
             </div>
 
             <div className="pt-6 border-t border-slate-200">
-              <p className="text-sm text-slate-600">
+              <p className="text-sm text-slate-700">
                 Want a discount or alternatives?{' '}
                 <button
                   type="button"
@@ -140,7 +140,7 @@ export default function ProductDetailPage() {
 
             <div className="pt-6 border-t border-slate-200">
               <h3 className="text-h3 mb-3">Details</h3>
-              <dl className="space-y-2 text-slate-600">
+              <dl className="space-y-2 text-slate-700">
                 <div><dt className="inline font-medium">Category </dt><dd className="inline">{product.category}</dd></div>
                 <div><dt className="inline font-medium">Rating </dt><dd className="inline">{product.rating} / 5.0</dd></div>
                 {product.colors?.length > 0 && (
