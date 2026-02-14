@@ -5,7 +5,7 @@ import { useStore } from '@/app/context/StoreContext';
 import Image from 'next/image';
 
 export default function ProductGrid() {
-  const { visibleProducts, navigateToProduct } = useStore();
+  const { visibleProducts } = useStore();
 
   if (!visibleProducts || visibleProducts.length === 0) {
     return (
@@ -25,7 +25,6 @@ export default function ProductGrid() {
         <Link
           key={product.id}
           href={`/products/${product.id}`}
-          onClick={() => navigateToProduct(product.id)}
           className="group block"
         >
           <article className="card overflow-hidden h-full flex flex-col transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
