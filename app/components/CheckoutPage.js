@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useStore } from '@/app/context/StoreContext';
 import Image from 'next/image';
 
@@ -101,7 +102,23 @@ export default function CheckoutPage() {
                     )}
                   </div>
                   <div className="flex-1">
-                    <p className="font-medium text-slate-800">{item.product.name}</p>
+                    <p className="font-medium text-slate-800 mb-1">{item.product.name}</p>
+                    <p className="text-xs text-stone-500 mb-1 uppercase">
+                      {item.product.category}
+                    </p>
+                    {item.product.colors && Array.isArray(item.product.colors) && item.product.colors.length > 0 && (
+                      <div className="flex flex-wrap gap-1 mb-2">
+                        {item.product.colors.map((color, idx) => (
+                          <span
+                            key={idx}
+                            className="text-xs px-1.5 py-0.5 bg-stone-100 text-stone-600 rounded"
+                            title={color}
+                          >
+                            {color}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                     <p className="text-sm text-stone-600">
                       ${item.product.price} × {item.quantity}
                     </p>
@@ -118,14 +135,24 @@ export default function CheckoutPage() {
 
           {/* Coupon Display */}
           {appliedCoupon && (
-            <div className="p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+            <div className={`p-4 rounded-lg border ${
+              appliedCoupon.discountPercent < 0 
+                ? 'bg-red-50 border-red-200' 
+                : 'bg-emerald-50 border-emerald-200'
+            }`}>
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm font-medium text-emerald-800">
-                    Coupon Applied: {appliedCoupon.code}
+                  <p className={`text-sm font-medium ${
+                    appliedCoupon.discountPercent < 0 ? 'text-red-800' : 'text-emerald-800'
+                  }`}>
+                    {appliedCoupon.discountPercent < 0 ? 'Penalty Applied' : 'Coupon Applied'}: {appliedCoupon.code}
                   </p>
-                  <p className="text-xs text-emerald-600">
-                    {appliedCoupon.discountPercent}% discount
+                  <p className={`text-xs ${
+                    appliedCoupon.discountPercent < 0 ? 'text-red-600' : 'text-emerald-600'
+                  }`}>
+                    {appliedCoupon.discountPercent < 0 
+                      ? `+${Math.abs(appliedCoupon.discountPercent)}% increase` 
+                      : `${appliedCoupon.discountPercent}% discount`}
                   </p>
                 </div>
               </div>
@@ -138,10 +165,10 @@ export default function CheckoutPage() {
               <span>Subtotal</span>
               <span>${cartTotal.subtotal.toFixed(2)}</span>
             </div>
-            {appliedCoupon && cartTotal.discount > 0 && (
-              <div className="flex justify-between text-emerald-600">
-                <span>Discount</span>
-                <span>-${cartTotal.discount.toFixed(2)}</span>
+            {appliedCoupon && cartTotal.discount !== 0 && (
+              <div className={`flex justify-between ${cartTotal.isPenalty ? 'text-red-600' : 'text-emerald-600'}`}>
+                <span>{cartTotal.isPenalty ? 'Price Adjustment' : 'Discount'}</span>
+                <span>{cartTotal.isPenalty ? `+$${Math.abs(cartTotal.discount).toFixed(2)}` : `-$${cartTotal.discount.toFixed(2)}`}</span>
               </div>
             )}
             <div className="flex justify-between text-xl font-bold text-slate-800 pt-2 border-t border-stone-200">
@@ -152,49 +179,50 @@ export default function CheckoutPage() {
 
           {/* Shipping Info Form (UI Only) */}
           <div className="border-t border-stone-200 pt-6">
-            <h3 className="text-lg font-semibold text-slate-800 mb-4">Shipping Information</h3>
-            <div className="space-y-4">
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Full Name
-                </label>
-                <input
-                  type="text"
-                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="John Doe"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Email Address
-                </label>
-                <input
-                  type="email"
-                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  placeholder="john@example.com"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-slate-700 mb-1">
-                  Shipping Address
-                </label>
-                <textarea
-                  className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
-                  rows={3}
-                  placeholder="123 Main St, City, State, ZIP"
-                />
-              </div>
-            </div>
-          </div>
+                  <h3 className="text-lg font-semibold text-slate-800 mb-4">Shipping Information</h3>
+                  <div className="space-y-4">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        Full Name
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800"
+                        placeholder="John Doe"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        Email Address
+                      </label>
+                      <input
+                        type="email"
+                        className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800"
+                        placeholder="john@example.com"
+                      />
+                    </div>
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700 mb-1">
+                        Shipping Address
+                      </label>
+                      <textarea
+                        className="w-full px-4 py-2 border border-stone-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent text-slate-800"
+                        rows={3}
+                        placeholder="123 Main St, City, State, ZIP"
+                      />
+                    </div>
+                  </div>
+                </div>
 
           {/* Actions */}
           <div className="flex gap-3 pt-4 border-t border-stone-200">
-            <button
+            <Link
+              href="/products"
               onClick={handleClose}
-              className="flex-1 px-6 py-3 border border-stone-300 text-slate-800 rounded-lg hover:bg-stone-50 transition-colors font-medium"
+              className="flex-1 px-6 py-3 border border-stone-300 text-slate-800 rounded-lg hover:bg-stone-50 transition-colors font-medium text-center inline-block"
             >
               Back to Shopping
-            </button>
+            </Link>
             <button
               onClick={() => {
                 alert('Thank you for your order! (This is a demo - no payment processed)');

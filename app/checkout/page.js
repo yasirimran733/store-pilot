@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { StoreProvider } from '@/app/context/StoreContext';
 import Navbar from '@/app/components/Navbar';
 import Footer from '@/app/components/Footer';
@@ -17,12 +18,13 @@ function CheckoutContent() {
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
           <h2 className="text-3xl font-bold text-slate-800 mb-4">Your cart is empty</h2>
           <p className="text-stone-600 mb-8">Add items to your cart before checkout.</p>
-          <button
+          <Link
+            href="/products"
             onClick={() => navigateTo('products')}
-            className="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
+            className="inline-block px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
           >
             Browse Products
-          </button>
+          </Link>
         </div>
         <Footer />
         <FloatingChatWidget />

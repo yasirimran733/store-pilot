@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { useStore } from '@/app/context/StoreContext';
 import Image from 'next/image';
 
@@ -23,32 +24,36 @@ export default function ProductGrid() {
           onClick={() => navigateToProduct(product.id)}
         >
           {/* Product Image */}
-          <div className="relative w-full h-64 bg-stone-100 overflow-hidden">
-            {product.image && product.image.startsWith('/') ? (
-              <Image
-                src={product.image}
-                alt={product.name}
-                fill
-                className="object-cover group-hover:scale-105 transition-transform duration-300"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-              />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center bg-stone-200">
-                <span className="text-stone-400 text-sm">No image</span>
+          <Link href={`/products/${product.id}`} onClick={() => navigateToProduct(product.id)}>
+            <div className="relative w-full h-64 bg-stone-100 overflow-hidden">
+              {product.image && product.image.startsWith('/') ? (
+                <Image
+                  src={product.image}
+                  alt={product.name}
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-300"
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                />
+              ) : (
+                <div className="w-full h-full flex items-center justify-center bg-stone-200">
+                  <span className="text-stone-400 text-sm">No image</span>
+                </div>
+              )}
+              {/* Rating Badge */}
+              <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
+                <span className="text-emerald-600 text-xs font-semibold">★</span>
+                <span className="text-xs font-medium text-slate-800">{product.rating}</span>
               </div>
-            )}
-            {/* Rating Badge */}
-            <div className="absolute top-3 right-3 bg-white/90 backdrop-blur-sm px-2 py-1 rounded-full flex items-center gap-1">
-              <span className="text-emerald-600 text-xs font-semibold">★</span>
-              <span className="text-xs font-medium text-slate-800">{product.rating}</span>
             </div>
-          </div>
+          </Link>
 
           {/* Product Info */}
           <div className="p-4">
-            <h3 className="font-semibold text-slate-800 text-lg mb-1 group-hover:text-emerald-600 transition-colors">
-              {product.name}
-            </h3>
+            <Link href={`/products/${product.id}`} onClick={() => navigateToProduct(product.id)}>
+              <h3 className="font-semibold text-slate-800 text-lg mb-1 group-hover:text-emerald-600 transition-colors">
+                {product.name}
+              </h3>
+            </Link>
             <p className="text-stone-600 text-sm mb-3 line-clamp-2">{product.description}</p>
             
             {/* Category & Colors */}
@@ -79,15 +84,17 @@ export default function ProductGrid() {
               <span className="text-2xl font-bold text-slate-800">
                 ${product.price}
               </span>
-              <button
+              <Link
+                href={`/products/${product.id}`}
                 onClick={(e) => {
                   e.stopPropagation();
                   navigateToProduct(product.id);
                 }}
-                className="px-4 py-1.5 bg-slate-800 text-white text-sm rounded-lg hover:bg-slate-700 transition-colors font-medium"
+                className="px-4 py-1.5 bg-slate-800 text-white text-sm rounded-lg hover:bg-slate-700 transition-colors font-medium inline-block"
+                aria-label={`View details for ${product.name}`}
               >
                 View Details
-              </button>
+              </Link>
             </div>
           </div>
         </div>

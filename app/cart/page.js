@@ -6,6 +6,7 @@ import Footer from '@/app/components/Footer';
 import FloatingChatWidget from '@/app/components/FloatingChatWidget';
 import { useStore } from '@/app/context/StoreContext';
 import Image from 'next/image';
+import Link from 'next/link';
 
 function CartContent() {
   const {
@@ -40,12 +41,13 @@ function CartContent() {
             </svg>
             <h2 className="text-3xl font-bold text-slate-800 mb-4">Your cart is empty</h2>
             <p className="text-stone-600 mb-8">Start shopping to add items to your cart!</p>
-            <button
+            <Link
+              href="/products"
               onClick={() => navigateTo('products')}
-              className="px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
+              className="inline-block px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
             >
               Browse Products
-            </button>
+            </Link>
           </div>
         </div>
         <Footer />
@@ -91,9 +93,27 @@ function CartContent() {
                   <h3 className="text-lg font-semibold text-slate-800 mb-1">
                     {item.product.name}
                   </h3>
-                  <p className="text-sm text-stone-600 mb-2">{item.product.category}</p>
-                  <p className="text-stone-600 mb-4">
+                  <p className="text-xs text-stone-500 mb-1 uppercase tracking-wide">
+                    {item.product.category}
+                  </p>
+                  {item.product.colors && Array.isArray(item.product.colors) && item.product.colors.length > 0 && (
+                    <div className="flex flex-wrap gap-1 mb-2">
+                      {item.product.colors.map((color, idx) => (
+                        <span
+                          key={idx}
+                          className="text-xs px-2 py-0.5 bg-stone-100 text-stone-600 rounded"
+                          title={color}
+                        >
+                          {color}
+                        </span>
+                      ))}
+                    </div>
+                  )}
+                  <p className="text-stone-600 mb-2">
                     ${item.product.price} × {item.quantity}
+                  </p>
+                  <p className="text-sm font-semibold text-slate-800 mb-3">
+                    Subtotal: ${(item.product.price * item.quantity).toFixed(2)}
                   </p>
                   <button
                     onClick={() => removeFromCart(item.product.id)}
@@ -120,19 +140,33 @@ function CartContent() {
 
               {/* Coupon Display */}
               {appliedCoupon && (
-                <div className="mb-4 p-4 bg-emerald-50 border border-emerald-200 rounded-lg">
+                <div className={`mb-4 p-4 rounded-lg border ${
+                  appliedCoupon.discountPercent < 0 
+                    ? 'bg-red-50 border-red-200' 
+                    : 'bg-emerald-50 border-emerald-200'
+                }`}>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm font-medium text-emerald-800">
-                        Coupon: {appliedCoupon.code}
+                      <p className={`text-sm font-medium ${
+                        appliedCoupon.discountPercent < 0 ? 'text-red-800' : 'text-emerald-800'
+                      }`}>
+                        {appliedCoupon.discountPercent < 0 ? 'Penalty' : 'Coupon'}: {appliedCoupon.code}
                       </p>
-                      <p className="text-xs text-emerald-600">
-                        {appliedCoupon.discountPercent}% off
+                      <p className={`text-xs ${
+                        appliedCoupon.discountPercent < 0 ? 'text-red-600' : 'text-emerald-600'
+                      }`}>
+                        {appliedCoupon.discountPercent < 0 
+                          ? `+${Math.abs(appliedCoupon.discountPercent)}% increase` 
+                          : `${appliedCoupon.discountPercent}% off`}
                       </p>
                     </div>
                     <button
                       onClick={removeCoupon}
-                      className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
+                      className={`text-sm font-medium ${
+                        appliedCoupon.discountPercent < 0 
+                          ? 'text-red-600 hover:text-red-700' 
+                          : 'text-emerald-600 hover:text-emerald-700'
+                      }`}
                     >
                       Remove
                     </button>
@@ -146,10 +180,10 @@ function CartContent() {
                   <span>Subtotal</span>
                   <span>${cartTotal.subtotal.toFixed(2)}</span>
                 </div>
-                {appliedCoupon && cartTotal.discount > 0 && (
-                  <div className="flex justify-between text-emerald-600">
-                    <span>Discount</span>
-                    <span>-${cartTotal.discount.toFixed(2)}</span>
+                {appliedCoupon && cartTotal.discount !== 0 && (
+                  <div className={`flex justify-between ${cartTotal.isPenalty ? 'text-red-600' : 'text-emerald-600'}`}>
+                    <span>{cartTotal.isPenalty ? 'Price Adjustment' : 'Discount'}</span>
+                    <span>{cartTotal.isPenalty ? `+$${Math.abs(cartTotal.discount).toFixed(2)}` : `-$${cartTotal.discount.toFixed(2)}`}</span>
                   </div>
                 )}
                 <div className="flex justify-between text-xl font-bold text-slate-800 pt-3 border-t border-stone-200">
@@ -160,24 +194,26 @@ function CartContent() {
 
               {/* Actions */}
               <div className="space-y-3">
-                <button
+                <Link
+                  href="/checkout"
                   onClick={() => navigateTo('checkout')}
-                  className="w-full px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
+                  className="w-full px-6 py-3 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium text-center inline-block"
                 >
                   Proceed to Checkout
-                </button>
+                </Link>
                 <button
                   onClick={clearCart}
                   className="w-full px-6 py-2 border border-stone-300 text-stone-700 rounded-lg hover:bg-stone-50 transition-colors font-medium"
                 >
                   Clear Cart
                 </button>
-                <button
+                <Link
+                  href="/products"
                   onClick={() => navigateTo('products')}
-                  className="w-full px-6 py-2 text-stone-600 hover:text-slate-800 transition-colors font-medium"
+                  className="w-full px-6 py-2 text-stone-600 hover:text-slate-800 transition-colors font-medium text-center inline-block"
                 >
                   Continue Shopping
-                </button>
+                </Link>
               </div>
             </div>
           </div>

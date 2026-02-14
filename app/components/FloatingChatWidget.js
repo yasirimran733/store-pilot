@@ -47,6 +47,9 @@ export default function FloatingChatWidget() {
         case 'negotiateDiscount':
           store.negotiateDiscount(params.request, params.productId);
           break;
+        case 'recommendProducts':
+          store.recommendProducts();
+          break;
         default:
           console.warn(`Unknown function: ${functionName}`);
       }
@@ -90,8 +93,11 @@ export default function FloatingChatWidget() {
       // Execute function calls BEFORE updating messages to ensure UI updates immediately
       if (data.executedFunction) {
         executeFunctionChain(data.executedFunction);
-        // Use requestAnimationFrame to ensure state updates are processed
+        // Wait for React to process state updates - use double RAF for reliability
         await new Promise(resolve => requestAnimationFrame(resolve));
+        await new Promise(resolve => requestAnimationFrame(resolve));
+        // Small delay to ensure all state updates are batched and processed
+        await new Promise(resolve => setTimeout(resolve, 50));
       }
 
       setMessages((prev) => [

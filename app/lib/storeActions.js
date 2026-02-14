@@ -89,24 +89,34 @@ export function createStoreActions(storeState) {
   return {
     /**
      * Add product to cart by ID
+     * CRITICAL: This function validates the product exists before returning success
      */
     addToCart: (productId) => {
       if (!productId || typeof productId !== 'number') {
-        return { success: false, error: 'Invalid product ID' };
+        return { success: false, error: 'Invalid product ID. Product ID must be a number.' };
       }
 
       const product = products.find((p) => p.id === productId);
       if (!product) {
-        return { success: false, error: 'Product not found' };
+        return { 
+          success: false, 
+          error: `Product with ID ${productId} not found in inventory. Please use searchProducts() first to find the correct product ID.`,
+          productId,
+        };
       }
 
-      // Return instruction for client to execute
+      // Return instruction for client to execute with product details for verification
       return {
         success: true,
         action: 'addToCart',
         productId,
-        product,
-        message: `Added ${product.name} to cart`,
+        product: {
+          id: product.id,
+          name: product.name,
+          category: product.category,
+          price: product.price,
+        },
+        message: `Ready to add ${product.name} (ID: ${product.id}, Category: ${product.category}) to cart`,
       };
     },
 
@@ -278,6 +288,18 @@ export function createStoreActions(storeState) {
         request,
         productId,
         message: 'Negotiation request received',
+      };
+    },
+
+    /**
+     * Recommend products based on user activity
+     */
+    recommendProducts: () => {
+      // This will be handled client-side via StoreContext
+      return {
+        success: true,
+        action: 'recommendProducts',
+        message: 'Recommendations generated',
       };
     },
   };

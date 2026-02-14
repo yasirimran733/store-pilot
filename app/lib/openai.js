@@ -21,13 +21,13 @@ export function getStoreFunctions() {
   return [
     {
       name: 'addToCart',
-      description: 'Add a product to the shopping cart by product ID. Use this when the user wants to purchase or add an item to their cart.',
+      description: 'Add a product to the shopping cart by product ID. CRITICAL RULES: 1) Before calling this, you MUST first call searchProducts() to find the exact product the user mentioned. 2) Use ONLY the product ID from search results. 3) Never guess or assume product IDs. 4) Verify the product name matches what user requested. Example: User says "add belt" → First call searchProducts("belt") → Get product ID from results → Then call addToCart(productId).',
       parameters: {
         type: 'object',
         properties: {
           productId: {
             type: 'number',
-            description: 'The unique ID of the product to add to cart',
+            description: 'The unique ID of the product to add to cart. MUST be obtained from searchProducts() results. Example: If searchProducts("belt") returns product with id: 15, use productId: 15.',
           },
         },
         required: ['productId'],
@@ -126,7 +126,7 @@ export function getStoreFunctions() {
     },
     {
       name: 'negotiateDiscount',
-      description: 'Negotiate a discount with the customer (Haggle Mode). Use this when the user asks for a discount, lower price, or mentions reasons like birthday, buying multiple items, being a student, etc. The function evaluates the request and either approves a discount (generating a coupon code) or politely refuses. Good reasons get meaningful discounts (15-25%), neutral reasons get small discounts (5-10%), rude requests are refused.',
+      description: 'Negotiate a discount with the customer (Haggle Mode). Use this when the user asks for a discount, lower price, or mentions reasons like birthday, buying multiple items, being a student, etc. The function evaluates the request and either approves a discount (generating a coupon code) or politely refuses. Good reasons get meaningful discounts (15-25%), neutral reasons get small discounts (5-10%), rude requests result in price increases.',
       parameters: {
         type: 'object',
         properties: {
@@ -140,6 +140,15 @@ export function getStoreFunctions() {
           },
         },
         required: ['request'],
+      },
+    },
+    {
+      name: 'recommendProducts',
+      description: 'Recommend products to the user based on their browsing and purchase history. Use this proactively when the user seems indecisive, after they view products, or when they ask for suggestions. This analyzes their viewed products, cart items, and search history to suggest relevant items.',
+      parameters: {
+        type: 'object',
+        properties: {},
+        required: [],
       },
     },
   ];
@@ -168,14 +177,36 @@ Rules:
 - Use sortProducts() when users ask for cheaper/more expensive options
 - Navigate to product pages with navigateToProduct() when users want details
 
+CRITICAL: Adding Products to Cart:
+- When user says "add [product name]" (e.g., "add belt", "add shirt", "add watch"):
+  1. FIRST call searchProducts("[product name]") to find the exact product
+  2. Check the search results to identify the correct product ID
+  3. THEN call addToCart(productId) with the ID from search results
+  4. NEVER guess or assume product IDs - always search first
+- Example: User says "add belt"
+  → Step 1: searchProducts("belt") → returns product with id: 15
+  → Step 2: addToCart(15) → adds the correct belt
+- If search returns multiple products, use the first/best match
+- Always verify the product name matches what the user requested
+
 Haggle Mode (Negotiation):
 - When customers ask for discounts, use negotiateDiscount(request, productId)
 - Good reasons (birthday, buying multiple, student, VIP) → meaningful discounts (15-25%)
 - Neutral reasons → small discounts (5-10%)
-- Rude requests or lowball offers → politely refuse
+- CRITICAL: Rude/abusive/uncivilized language → ALWAYS refuse discount and apply price increase (10-20% penalty)
+- Rude language includes: profanity, insults, threats, disrespectful words, unethical language
+- If the user uses ANY abusive or uncivilized words (even if they mention good reasons like "buying multiple"), the request is rude and gets penalty
+- Example: "idiot I want to buy 3" → RUDE (penalty), NOT discount
 - The function automatically generates unique coupon codes and applies them
 - Be confident but fair - you have a spine and won't accept unreasonable deals
 - If a discount is approved, the coupon is automatically applied to the cart
+
+Sales Agent (Recommendations):
+- Proactively recommend products using recommendProducts() function
+- Use this after users view products, add items to cart, or search
+- Analyze their activity (viewed products, cart items, search history) to suggest relevant items
+- Be helpful but not pushy - recommend genuinely useful products
+- Example: "Based on what you've been looking at, you might also like..."
 
 Remember: You control the store. Act like a real shopkeeper who can actually change what customers see.`;
 }

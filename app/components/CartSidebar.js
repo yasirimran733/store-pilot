@@ -1,6 +1,7 @@
 'use client';
 
-import { useState } from 'react';
+import Link from 'next/link';
+import { useState, useEffect } from 'react';
 import { useStore } from '@/app/context/StoreContext';
 import Image from 'next/image';
 
@@ -16,6 +17,14 @@ export default function CartSidebar() {
     removeCoupon,
   } = useStore();
   const [isOpen, setIsOpen] = useState(false);
+
+  // Auto-open sidebar when item is added (if closed)
+  useEffect(() => {
+    if (cartItems.length > 0 && !isOpen) {
+      // Optionally auto-open, but don't force it
+      // setIsOpen(true);
+    }
+  }, [cartItems.length, isOpen]);
 
   const handleCheckout = () => {
     navigateTo('checkout');
@@ -135,13 +144,32 @@ export default function CartSidebar() {
                         <h3 className="font-medium text-slate-800 mb-1 truncate">
                           {item.product.name}
                         </h3>
+                        <p className="text-xs text-stone-500 mb-1 uppercase">
+                          {item.product.category}
+                        </p>
+                        {item.product.colors && Array.isArray(item.product.colors) && item.product.colors.length > 0 && (
+                          <div className="flex flex-wrap gap-1 mb-2">
+                            {item.product.colors.slice(0, 3).map((color, idx) => (
+                              <span
+                                key={idx}
+                                className="text-xs px-1.5 py-0.5 bg-stone-100 text-stone-600 rounded"
+                                title={color}
+                              >
+                                {color}
+                              </span>
+                            ))}
+                            {item.product.colors.length > 3 && (
+                              <span className="text-xs text-stone-400">+{item.product.colors.length - 3}</span>
+                            )}
+                          </div>
+                        )}
                         <p className="text-sm text-stone-600 mb-2">
                           ${item.product.price} × {item.quantity}
                         </p>
                         <div className="flex items-center gap-2">
                           <button
                             onClick={() => removeFromCart(item.product.id)}
-                            className="text-xs text-red-600 hover:text-red-700 transition-colors"
+                            className="text-xs text-red-600 hover:text-red-700 transition-colors font-medium"
                           >
                             Remove
                           </button>
@@ -165,18 +193,32 @@ export default function CartSidebar() {
               <div className="border-t border-stone-200 px-6 py-4 space-y-4">
                 {/* Coupon Display */}
                 {appliedCoupon && (
-                  <div className="flex items-center justify-between p-3 bg-emerald-50 border border-emerald-200 rounded-lg">
+                  <div className={`flex items-center justify-between p-3 rounded-lg border ${
+                    appliedCoupon.discountPercent < 0 
+                      ? 'bg-red-50 border-red-200' 
+                      : 'bg-emerald-50 border-emerald-200'
+                  }`}>
                     <div>
-                      <p className="text-sm font-medium text-emerald-800">
-                        Coupon: {appliedCoupon.code}
+                      <p className={`text-sm font-medium ${
+                        appliedCoupon.discountPercent < 0 ? 'text-red-800' : 'text-emerald-800'
+                      }`}>
+                        {appliedCoupon.discountPercent < 0 ? 'Penalty' : 'Coupon'}: {appliedCoupon.code}
                       </p>
-                      <p className="text-xs text-emerald-600">
-                        {appliedCoupon.discountPercent}% off
+                      <p className={`text-xs ${
+                        appliedCoupon.discountPercent < 0 ? 'text-red-600' : 'text-emerald-600'
+                      }`}>
+                        {appliedCoupon.discountPercent < 0 
+                          ? `+${Math.abs(appliedCoupon.discountPercent)}% increase` 
+                          : `${appliedCoupon.discountPercent}% off`}
                       </p>
                     </div>
                     <button
                       onClick={removeCoupon}
-                      className="text-emerald-600 hover:text-emerald-700 text-sm font-medium"
+                      className={`text-sm font-medium ${
+                        appliedCoupon.discountPercent < 0 
+                          ? 'text-red-600 hover:text-red-700' 
+                          : 'text-emerald-600 hover:text-emerald-700'
+                      }`}
                     >
                       Remove
                     </button>
@@ -189,10 +231,10 @@ export default function CartSidebar() {
                     <span>Subtotal</span>
                     <span>${cartTotal.subtotal.toFixed(2)}</span>
                   </div>
-                  {appliedCoupon && cartTotal.discount > 0 && (
-                    <div className="flex justify-between text-emerald-600">
-                      <span>Discount</span>
-                      <span>-${cartTotal.discount.toFixed(2)}</span>
+                  {appliedCoupon && cartTotal.discount !== 0 && (
+                    <div className={`flex justify-between ${cartTotal.isPenalty ? 'text-red-600' : 'text-emerald-600'}`}>
+                      <span>{cartTotal.isPenalty ? 'Price Adjustment' : 'Discount'}</span>
+                      <span>{cartTotal.isPenalty ? `+$${Math.abs(cartTotal.discount).toFixed(2)}` : `-$${cartTotal.discount.toFixed(2)}`}</span>
                     </div>
                   )}
                   <div className="flex justify-between text-lg font-bold text-slate-800 pt-2 border-t border-stone-200">
@@ -209,12 +251,13 @@ export default function CartSidebar() {
                   >
                     Clear Cart
                   </button>
-                  <button
+                  <Link
+                    href="/checkout"
                     onClick={handleCheckout}
-                    className="flex-1 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium"
+                    className="flex-1 px-4 py-2 bg-slate-800 text-white rounded-lg hover:bg-slate-700 transition-colors font-medium text-center inline-block"
                   >
                     Checkout
-                  </button>
+                  </Link>
                 </div>
               </div>
             )}

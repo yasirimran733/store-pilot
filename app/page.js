@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { StoreProvider } from '@/app/context/StoreContext';
 import ProductGrid from '@/app/components/ProductGrid';
 import FloatingChatWidget from '@/app/components/FloatingChatWidget';
@@ -26,12 +27,13 @@ function HomeContent() {
               Your AI-powered shopping experience. Chat with our shopkeeper to find exactly what you're looking for.
             </p>
             <div className="flex gap-4">
-              <button
+              <Link
+                href="/products"
                 onClick={() => navigateTo('products')}
-                className="px-6 py-3 bg-white text-slate-800 rounded-lg hover:bg-stone-100 transition-colors font-semibold"
+                className="px-6 py-3 bg-white text-slate-800 rounded-lg hover:bg-stone-100 transition-colors font-semibold inline-block"
               >
                 Shop Now
-              </button>
+              </Link>
               <button
                 onClick={() => {
                   document.getElementById('featured')?.scrollIntoView({ behavior: 'smooth' });

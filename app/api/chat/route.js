@@ -31,15 +31,15 @@ export async function POST(request) {
     ];
 
     // Call OpenAI with function calling enabled
-    // Use gpt-4o-mini for cheap and fast testing
-    const model = process.env.OPENAI_MODEL || 'gpt-4o-mini';
+    // Default: gpt-4o for best accuracy (correct products, haggle, multi-step). Override with OPENAI_MODEL for cheaper testing.
+    const model = process.env.OPENAI_MODEL || 'gpt-4o';
     
     const completion = await openai.chat.completions.create({
       model,
       messages,
       functions,
       function_call: 'auto', // Let AI decide when to call functions
-      temperature: 0.7,
+      temperature: 0.5, // Slightly lower for more consistent function calling
       max_tokens: 1000,
     });
 
@@ -83,7 +83,7 @@ export async function POST(request) {
           messages: followUpMessages,
           functions,
           function_call: 'auto',
-          temperature: 0.7,
+          temperature: 0.5,
           max_tokens: 1000,
         });
 
@@ -128,7 +128,7 @@ export async function POST(request) {
           const finalCompletion = await openai.chat.completions.create({
             model,
             messages: finalMessages,
-            temperature: 0.7,
+            temperature: 0.5,
             max_tokens: 1000,
           });
 
@@ -226,6 +226,18 @@ function buildUpdatedStatePreview(functionName, params, result) {
           code: result.couponCode,
           discountPercent: result.discountPercent,
         };
+      } else if (result.penaltyCouponCode) {
+        // Include penalty coupon for rude behavior
+        state.appliedCoupon = {
+          code: result.penaltyCouponCode,
+          discountPercent: -result.priceIncreasePercent, // Negative = price increase
+        };
+      }
+      break;
+
+    case 'recommendProducts':
+      if (result.products) {
+        state.recommendedProducts = result.products;
       }
       break;
 

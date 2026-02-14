@@ -39,6 +39,22 @@ npm run dev
 
 Visit `http://localhost:3000` to see Store Pilot in action.
 
+### 🤖 AI Model (recommended for best accuracy)
+
+The app uses **GPT-4o** by default for reliable function calling (correct products in cart, haggle logic, multi-step flows).
+
+| Use case | Model | Set in `.env.local` |
+|----------|--------|----------------------|
+| **Demo / production** (best accuracy) | `gpt-4o` | default, or `OPENAI_MODEL=gpt-4o` |
+| **Cheaper testing** (faster, lower cost) | `gpt-4o-mini` | `OPENAI_MODEL=gpt-4o-mini` |
+| **Maximum capability** (complex reasoning) | `gpt-4-turbo` | `OPENAI_MODEL=gpt-4-turbo` |
+
+Example `.env.local` for cheaper testing:
+```bash
+OPENAI_API_KEY=sk-...
+OPENAI_MODEL=gpt-4o-mini
+```
+
 ## 🏗️ Project Structure
 
 ```
