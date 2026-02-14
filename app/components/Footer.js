@@ -28,19 +28,28 @@ export default function Footer() {
           </div>
 
           <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Support</h3>
+            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Connect</h3>
             <ul className="space-y-3 text-sm">
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Contact</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">FAQ</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Shipping</a></li>
-            </ul>
-          </div>
-
-          <div>
-            <h3 className="text-sm font-semibold uppercase tracking-wider text-slate-200 mb-4">Legal</h3>
-            <ul className="space-y-3 text-sm">
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Terms</a></li>
-              <li><a href="#" className="text-slate-300 hover:text-white transition-colors">Privacy</a></li>
+              <li>
+                <a
+                  href="https://www.linkedin.com/in/yasir-imran"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 hover:text-white transition-colors"
+                >
+                  LinkedIn
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://github.com/yasirimran733"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-slate-300 hover:text-white transition-colors"
+                >
+                  GitHub
+                </a>
+              </li>
             </ul>
           </div>
         </div>
